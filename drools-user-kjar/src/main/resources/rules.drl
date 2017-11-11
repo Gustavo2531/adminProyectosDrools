@@ -1,0 +1,115 @@
+package org.drools.workshop;
+import org.drools.workshop.model.*;
+
+
+rule "Max Room Temp"
+    when
+        $m: SensorM(movimiento == true)
+        $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && maxtemperatura <= $ac.temperatura)
+    then
+        $ac.setTemperatura($r.getMaxTemperatura());
+    end
+
+rule "Min Room Temp"
+
+    when
+        $m: SensorM(movimiento == true)
+        $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && mintemperatura >= $ac.temperatura)
+    then
+         $ac.setTemperatura($r.getMinTemperatura());
+    end
+
+rule "No Movement"
+    when
+        $m: SensorM(movimiento == false)
+        $r: Room($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+
+    then
+        $ac.setConectado(false):
+        $af.setConectado(false):
+        $aa.setConectado(false):
+end
+
+rule "Consumo de Energia"
+    when
+        $m: SensorM(movimiento == true)
+        $r: Room($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+         eval(($ac.getConsumoEnergia()+$af.getConsumoEnergia()+$aa.getConsumoEnergia()) > $r.getMaxConsumoEnergia())
+    then
+        $aa.setConsumoEnergia($r.getMinConsumoEnergia());
+        $aa.setConsumoEnergia($r.getMinConsumoEnergia());
+        $aa.setConsumoEnergia($r.getMinConsumoEnergia());
+end
+
+rule "Max Vel"
+    when
+        $m: SensorM(movimiento == true)
+        $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && maxVelocidad <= $aa.velocidad)
+    then
+        $aa.setVelocidad($r.getMaxVelocidad());
+    end
+
+rule "Min Vel"
+    when
+        $m: SensorM(movimiento == true)
+        $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && minVelocidad >= $aa.velocidad)
+    then
+        $aa.setVelocidad($r.getMinVelocidad());
+    end
+
+rule "NuevoProfe"
+        when
+            $a: Alumno()
+            $b: Bloque()
+            $e: Ejercicio()
+            $cb: CursoAlumnoBloque($a.matricula == matricula && $b.nombre == nombreBloque )
+            $ea: EjercicioAlumnoBloque($cb.matricula == matricula && $b.nombre == nombreBloque && $e.nombre==nombreEjercicio)
+            eval($ea.getCalificacion() > 70)
+        then
+           // $cb.setNombreBloque($b.getNextBloque());
+            //$cb.setPorcentaje($cb.getPorcentaje()+10);
+            int h = $cb.getPorcentaje() + 20;
+            insert(new CursoAlumnoBloque($cb.getMatricula(), $b.getNextBloque(),$cb.getNombreCurso(),80));
+
+            //insert(new Profesor("Rafael Lozano","A01332475"));
+
+    end
+    
+    rule "Examen No Pasado"
+	when
+  	  $a: Alumno()
+  	  $e: Ejercicio()
+   	  $b: Bloque()
+   	  $ea: EjercicioAlumnoBloque($a.matricula == matricula && $e.nombre==nombreEjercicio && $b.nombre == nombreBloque)
+	  $cb: CursoAlumnoBloque($ea.matricula == matricula && $ea.nombreBloque==nombreBloque)
+  	  eval($ea.getNombreBloque().equals($cb.getNombreBloque()))
+      eval($ea.getCalificacion() < 70 || $ea.getTiempoAlumno() > $e.getTiempoPrueba())
+	  then
+	    insert(new Material($ea.getMatricula(), $a.getNombre(), $cb.getNombreCurso(),$e.getTema()));
+end
+
+rule "RecomendarCurso"
+        when
+            $a: Alumno()
+            $ar: Area()
+            $b: Bloque()
+            $cur: Curso(nombreArea==$ar.nombre)
+            $cur2: Curso(nombreArea==$ar.nombre && nombreCurso != $cur.nombreCurso)
+            $cb: CursoAlumnoBloque($a.matricula == matricula && $b.nombre == nombreBloque && nombreCurso == $cur.nombreCurso)
+            eval($cb.getPorcentaje() > 75)
+
+//conditions
+        then
+            System.out.println(""+$cb.getPorcentaje());
+            insert(new RecomendacionCurso($cb.getMatricula(), $a.getNombre(),$cur2.getNombreCurso()));
+end
