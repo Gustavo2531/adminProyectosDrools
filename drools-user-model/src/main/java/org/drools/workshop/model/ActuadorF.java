@@ -10,18 +10,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ActuadorF {
     
     
-    private String nombre;
-    private Integer id;
-    private float [][]color = new float[1][2];
-    private String unidad;
-    private String ubicacionE;
-    private String ubicacionC;
-    private float consumoEnergia;
-    private String descripcion;
-    private String tipoActuador;
-    private boolean estado;
-    private boolean conectado;
-    private float intensidad;
+    public String nombre;
+    public Integer id;
+    public float [][]color = new float[1][2];
+    public String unidad;
+    public String ubicacionE;
+    public String ubicacionC;
+    public float consumoEnergia;
+    public String descripcion;
+    public String tipoActuador;
+    public boolean estado;
+    public boolean conectado;
+    public float intensidad;
     
     public ActuadorF() {
     }

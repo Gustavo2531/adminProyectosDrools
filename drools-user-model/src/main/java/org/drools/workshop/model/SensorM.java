@@ -14,15 +14,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class SensorM {
     
-    private String ubicacionE;
-    private String ubicacionC;
-    private Integer id;
-    private String descripcion;
-    private String tipoSensor;
-    private boolean estado;
-    private boolean conectado;
-    private boolean movimiento;
-    private String nombre;
+    public String ubicacionE;
+    public String ubicacionC;
+    public Integer id;
+    public String descripcion;
+    public String tipoSensor;
+    public boolean estado;
+    public boolean conectado;
+    public boolean movimiento;
+    public String nombre;
     
     public SensorM() {
     }

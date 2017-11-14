@@ -6,7 +6,7 @@ rule "Max Room Temp"
     when
         $m: SensorM(movimiento == true)
         $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && maxtemperatura <= $ac.temperatura)
+        $r: Cuarto($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && $ac.temperatura>maxtemperatura )
     then
         $ac.setTemperatura($r.getMaxTemperatura());
     end
@@ -16,7 +16,7 @@ rule "Min Room Temp"
     when
         $m: SensorM(movimiento == true)
         $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && mintemperatura >= $ac.temperatura)
+        $r: Cuarto($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && $ac.temperatura < mintemperatura )
     then
          $ac.setTemperatura($r.getMinTemperatura());
     end
@@ -24,21 +24,21 @@ rule "Min Room Temp"
 rule "No Movement"
     when
         $m: SensorM(movimiento == false)
-        $r: Room($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
 
     then
-        $ac.setConectado(false):
-        $af.setConectado(false):
-        $aa.setConectado(false):
+        $ac.setConectado(false);
+        $af.setConectado(false);
+        $aa.setConectado(false);
 end
 
 rule "Consumo de Energia"
     when
         $m: SensorM(movimiento == true)
-        $r: Room($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
@@ -53,7 +53,7 @@ rule "Max Vel"
     when
         $m: SensorM(movimiento == true)
         $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && maxVelocidad <= $aa.velocidad)
+        $r: Cuarto($aa.ubicacionE==ubicacionE && $aa.ubicacionC==ubicacionC && maxVelocidad <= $aa.velocidad)
     then
         $aa.setVelocidad($r.getMaxVelocidad());
     end
@@ -62,7 +62,7 @@ rule "Min Vel"
     when
         $m: SensorM(movimiento == true)
         $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-        $r: Room($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && minVelocidad >= $aa.velocidad)
+        $r: Cuarto($aa.ubicacionE==ubicacionE && $aa.ubicacionC==ubicacionC && minVelocidad >= $aa.velocidad)
     then
         $aa.setVelocidad($r.getMinVelocidad());
     end

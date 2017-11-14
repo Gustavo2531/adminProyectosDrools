@@ -14,17 +14,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ActuadorC {
     
-    private String nombre;
-    private Integer id;
-    private String unidad;
-    private String ubicacionE;
-    private String ubicacionC;
-    private float consumoEnergia;
-    private String descripcion;
-    private String tipoActuador;
-    private boolean estado;
-    private boolean conectado;
-    private float temperatura;
+    public String nombre;
+    public Integer id;
+    public String unidad;
+    public String ubicacionE;
+    public String ubicacionC;
+    public float consumoEnergia;
+    public String descripcion;
+    public String tipoActuador;
+    public boolean estado;
+    public boolean conectado;
+    public float temperatura;
     
     public ActuadorC() {
     }

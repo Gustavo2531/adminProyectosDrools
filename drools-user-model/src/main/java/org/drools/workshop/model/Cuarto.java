@@ -9,16 +9,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Cuarto {
     
-    private String nombre;
-    private Integer id;
-    private Integer maxVelocidad;
-    private Integer minVelocidad;
-    private String ubicacionE;
-    private String ubicacionC;
-    private float maxconsumoEnergia;
-     private float minconsumoEnergia;
-    private float maxtemperatura;
-    private float mintemperatura;
+    public String nombre;
+    public Integer id;
+    public Integer maxVelocidad;
+    public Integer minVelocidad;
+    public String ubicacionE;
+    public String ubicacionC;
+    public float maxconsumoEnergia;
+     public float minconsumoEnergia;
+    public float maxtemperatura;
+    public float mintemperatura;
 
     public Cuarto() {
     }
