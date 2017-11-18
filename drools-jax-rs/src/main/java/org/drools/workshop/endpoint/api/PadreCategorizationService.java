@@ -26,32 +26,13 @@ public interface PadreCategorizationService {
 //    @Path("/inserta")
 //    public Padre insertaPadre(@NotNull Padre padre);
     
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaAlumno")
-    public Alumno insertaAlumno(@NotNull Alumno alumno);
-    
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaBloque")
-    public Bloque insertaBloque(@NotNull Bloque bloque);
     
     
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    @Path("/insertaArea")
-    public Area insertaArea(@NotNull Area area);
-    
-    
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaCurso")
-    public Curso insertaCurso(@NotNull Curso curso);
-    
+    @Path("/login")
+    public SensorC login(@NotNull User user);
     @POST
     @Consumes("application/json")
     @Produces("application/json")
@@ -90,76 +71,7 @@ public interface PadreCategorizationService {
     public ActuadorF insertaActuadorF(@NotNull ActuadorF actuadorF);
     
     
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaProfesor")
-    public Profesor insertaProfesor(@NotNull Profesor profesor);
-    
-    
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaEjercicioAlumno")
-    public EjercicioAlumnoBloque insertaEjercicioAlumno(@NotNull EjercicioAlumnoBloque ejercicioAlumno);
-    
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaEjercicio")
-    public Ejercicio insertaEjercicio(@NotNull Ejercicio ejercicio);
-    
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaAlumnoCurso")
-    public AlumnoCursoProfesor insertaAlumnoCurso(@NotNull AlumnoCursoProfesor alumnoCurso);
-    
-    
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaCursoArea")
-    public CursoArea insertaCursoArea(@NotNull CursoArea cursoArea);
-    
-    
-    @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    @Path("/insertaCursoBloque")
-    public CursoAlumnoBloque insertaCursoBloque(@NotNull CursoAlumnoBloque cursoBloque);
-    
-        
-    @GET
-    @Produces("application/json")
-    @Path("bloquesNuevos")
-    public List<CursoAlumnoBloque> getCursoBloques();
-    
-    @GET
-    @Produces("application/json")
-    @Path("recomendacionesCursos")
-    public List<RecomendacionCurso> getRecomendacionCursos();
-    
-    @GET
-    @Produces("application/json")
-    @Path("alumnos")
-    public List<Alumno> getAlumnos();
-    
-    @GET
-    @Produces("application/json")
-    @Path("profesores")
-    public List<Profesor> getProfesors();
-    
-    @GET
-    @Produces("application/json")
-    @Path("areas")
-    public List<Area> getAreas();
-    
-    @GET
-    @Produces("application/json")
-    @Path("cursos")
-    public List<Curso> getCursos();
-    
+   
     @GET
     @Produces("application/json")
     @Path("sensorCs")
@@ -190,45 +102,4 @@ public interface PadreCategorizationService {
     @Path("cuartos")
     public List<Cuarto> getCuartos();
     
-    @GET
-    @Produces("application/json")
-    @Path("bloques")
-    public List<Bloque> getBloques();
-    
-    @GET
-    @Produces("application/json")
-    @Path("ejercicios")
-    public List<Ejercicio> getEjercicios();
-
-    @GET
-    @Produces("application/json")
-    @Path("material")
-    public List<Material> getMateriales();
-
-    
-    @GET
-    @Produces("application/json")
-    @Path("cursoArea")
-    public List<CursoArea> getCursoAreas();
-    
-    @GET
-    @Produces("application/json")
-    @Path("EjercicioAlumno")
-    public List<EjercicioAlumnoBloque> getEjercicioAlumnos();
-    
-    @GET
-    @Produces("application/json")
-    @Path("alumnoCurso")
-    public List<AlumnoCursoProfesor> getAlumnoCursos();
-    
-//    @GET
-//    @Produces("application/json")
-//    @Path("ancestros")
-//    public List<Ancestro> getAncestros();
-//    
-//    
-//    @GET
-//    @Produces("application/json")
-//    @Path("ancestros")
-//    public List<Ancestro> getAncestros();
 }

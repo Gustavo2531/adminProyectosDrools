@@ -12,45 +12,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author salaboy
  */
 @XmlRootElement
-public class User {
-    
-    private String name;
-    private Integer age;
-    private String category;
-
-    public User() {
+public class User{
+    private String username;
+    private String password;
+    public User(String username, String password){
+       this.username = username;
+       this.password = password
     }
-
-    public String getName() {
-        return name;
+    public String getUsername(){
+        return this.username;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getPassword(){
+        return this.password;
     }
-
-    public Integer getAge() {
-        return age;
+    public void setUsername(String username){
+        this.username = username;
     }
-
-    public void setAge(Integer age) {
-        this.age = age;
+    public boolean validatePass(String pass){
+        return this.password.equals(pass.toLowerCase());
     }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" + "name=" + name + ", age=" + age + ", category=" + category + '}';
-    }
-
-   
-    
-    
 }
