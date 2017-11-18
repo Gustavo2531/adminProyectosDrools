@@ -32,7 +32,7 @@ public interface PadreCategorizationService {
     @Consumes("application/json")
     @Produces("application/json")
     @Path("/login")
-    public SensorC login(@NotNull User user);
+    public User login(@NotNull User user);
     @POST
     @Consumes("application/json")
     @Produces("application/json")
