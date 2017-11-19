@@ -42,7 +42,7 @@ public interface PadreCategorizationService {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    @Path("/insertaSensor")
+    @Path("/insertaSensorM")
     public SensorM insertaSensorM(@NotNull SensorM sensorM);
     
     
