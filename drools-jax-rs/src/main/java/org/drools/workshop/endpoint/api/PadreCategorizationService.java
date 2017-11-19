@@ -38,6 +38,18 @@ public interface PadreCategorizationService {
     @Produces("application/json")
     @Path("/insertaSensorC")
     public SensorC insertaSensorC(@NotNull SensorC sensorC);
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/insertaSensorL")
+    public SensorL insertaSensorL(@NotNull SensorL sensorL);
+    
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/insertaSensorT")
+    public SensorT insertaSensorT(@NotNull SensorT sensorT);
     
     @POST
     @Consumes("application/json")
@@ -76,6 +88,16 @@ public interface PadreCategorizationService {
     @Produces("application/json")
     @Path("sensorCs")
     public List<SensorC> getSensorCs();
+
+    @GET
+    @Produces("application/json")
+    @Path("sensorLs")
+    public List<SensorL> getSensorLs();
+
+    @GET
+    @Produces("application/json")
+    @Path("sensorTs")
+    public List<SensorT> getSensorTs();
     
     @GET
     @Produces("application/json")

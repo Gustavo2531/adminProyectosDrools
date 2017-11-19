@@ -69,6 +69,24 @@ public class PadreCategorizationServiceImpl implements PadreCategorizationServic
         return sensorC;
         
     }
+
+    @Override
+    public SensorT insertaSensorT(SensorT sensorT) {
+        System.out.println(">> Sensor: " + sensorT);
+        kSession.insert(sensorT);
+        int fired = kSession.fireAllRules();
+        System.out.println(">> Fired: " + fired);
+        return sensorT;   
+    }
+
+    @Override
+    public SensorL insertaSensorL(SensorL sensorL) {
+        System.out.println(">> Sensor: " + sensorL);
+        kSession.insert(sensorL);
+        int fired = kSession.fireAllRules();
+        System.out.println(">> Fired: " + fired);
+        return sensorL;   
+    }
     
     @Override
     public ActuadorA insertaActuadorA(ActuadorA actuadorA) {
@@ -103,44 +121,66 @@ public class PadreCategorizationServiceImpl implements PadreCategorizationServic
     
     @Override
     public List<SensorC> getSensorCs() {
-        List<SensorC> abuelos= new ArrayList<SensorC>();
+        List<SensorC> sensores= new ArrayList<SensorC>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof SensorC) {
-                abuelos.add((SensorC) o);
+                sensores.add((SensorC) o);
             }
         }
-        return abuelos;
+        return sensores;
+    }
+
+    @Override
+    public List<SensorT> getSensorTs() {
+        List<SensorT> sensores= new ArrayList<SensorT>();
+        for (Object o : kSession.getObjects()) {
+            if (o instanceof SensorT) {
+                sensores.add((SensorT) o);
+            }
+        }
+        return sensores;
+    }
+
+    @Override
+    public List<SensorL> getSensorLs() {
+        List<SensorL> sensores= new ArrayList<SensorL>();
+        for (Object o : kSession.getObjects()) {
+            if (o instanceof SensorL) {
+                sensores.add((SensorL) o);
+            }
+        }
+        return sensores;
     }
     
     @Override
     public List<ActuadorA> getActuadorAs() {
-        List<ActuadorA> abuelos= new ArrayList<ActuadorA>();
+        List<ActuadorA> actuadores= new ArrayList<ActuadorA>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof ActuadorA) {
-                abuelos.add((ActuadorA) o);
+                actuadores.add((ActuadorA) o);
             }
         }
-        return abuelos;
+        return actuadores;
     }
     @Override
     public List<ActuadorF> getActuadorFs() {
-        List<ActuadorF> abuelos= new ArrayList<ActuadorF>();
+        List<ActuadorF> actuadores= new ArrayList<ActuadorF>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof ActuadorF) {
-                abuelos.add((ActuadorF) o);
+                actuadores.add((ActuadorF) o);
             }
         }
-        return abuelos;
+        return actuadores;
     }
     @Override
     public List<ActuadorC> getActuadorCs() {
-        List<ActuadorC> abuelos= new ArrayList<ActuadorC>();
+        List<ActuadorC> actuadores= new ArrayList<ActuadorC>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof ActuadorC) {
-                abuelos.add((ActuadorC) o);
+                actuadores.add((ActuadorC) o);
             }
         }
-        return abuelos;
+        return actuadores;
     }
     
     @Override

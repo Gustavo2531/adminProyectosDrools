@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author salaboy
  */
 @XmlRootElement
-public class SensorT {
+public class SensorL {
     
     public String ubicacionE;
     public String ubicacionC;
@@ -86,7 +86,7 @@ public class SensorT {
         return cantidadLuz;
     }
     public void setCantidadLuz(float cantidadLuz) {
-        this.cantidadLuz cantidadLuz;
+        this.cantidadLuz =cantidadLuz;
     }
     @Override
     public String toString() {

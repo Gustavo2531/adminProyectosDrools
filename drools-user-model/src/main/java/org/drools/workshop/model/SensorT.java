@@ -86,7 +86,7 @@ public class SensorT {
         return temperatura;
     }
     public void setTemperatura(float temperatura) {
-        this.temperatura temperatura;
+        this.temperatura =temperatura;
     }
     @Override
     public String toString() {

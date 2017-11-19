@@ -16,9 +16,10 @@ public class Cuarto {
     public String ubicacionE;
     public String ubicacionC;
     public float maxconsumoEnergia;
-     public float minconsumoEnergia;
+    public float minconsumoEnergia;
     public float maxtemperatura;
     public float mintemperatura;
+    public float threshold;
 
     public Cuarto() {
     }
@@ -103,13 +104,18 @@ public class Cuarto {
     public void setMaxVelocidad(Integer maxVelocidad) {
         this.maxVelocidad = maxVelocidad;
     }
-    
+    public float getThreshold(){
+        return threshold;
+    }
+    public void setThreshold(float threshold){
+        this.threshold = threshold;
+    }
     @Override
     public String toString() {
         return "ActuadorC{" + "nombre=" + nombre + ", id=" + id + ", unidad=" + maxVelocidad + '}';
     }
     
-    public Cuarto(Integer id, String nombre, Integer maxVelocidad, Integer minVelocidad, String ubicacionE,String ubicacionC, float maxconsumoEnergia, float minconsumoEnergia, float maxtemperatura,float mintemperatura){
+    public Cuarto(Integer id, String nombre, Integer maxVelocidad, Integer minVelocidad, String ubicacionE,String ubicacionC, float maxconsumoEnergia, float minconsumoEnergia, float maxtemperatura,float mintemperatura, float threshold){
         this.id = id;
         this.nombre = nombre;
         this.maxVelocidad = maxVelocidad;
@@ -120,6 +126,7 @@ public class Cuarto {
         this.minconsumoEnergia= minconsumoEnergia;
         this.maxtemperatura= maxtemperatura;
         this.mintemperatura= mintemperatura;
+        this.threshold = threshold;
     }
     
     

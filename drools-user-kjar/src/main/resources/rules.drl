@@ -67,3 +67,46 @@ rule "Min Vel"
         $aa.setVelocidad($r.getMinVelocidad());
     end
 
+rule "Apagar Luz"
+  when
+    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    eval($s.getLuzAmbiente() > $r.getThreshold())
+  then
+    $f.setConectado(false);
+end
+
+rule "Prender Luz"
+  when
+    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    eval($s.getLuzAmbiente() < $r.getThreshold())
+  then
+    $f.setConectado(true);
+end
+
+rule "Bajar cantidad de Luz"
+  when
+    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    eval($s.getLuzAmbiente() < $r.getThreshold() && $s.getLuzAmbiente() + $s.getLuzArtificial() > $r.getThreshold())
+  then
+    $f.setIntensidad(30);
+end
+
+rule "Subir cantidad de Luz"
+  when
+    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    eval($s.getLuzAmbiente() < $r.getThreshold() && $s.getLuzAmbiente() + $s.getLuzArtificial() < $r.getThreshold())
+  then
+    $f.setIntensidad(75);
+end
