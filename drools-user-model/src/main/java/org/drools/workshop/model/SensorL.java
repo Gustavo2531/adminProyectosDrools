@@ -21,7 +21,8 @@ public class SensorL {
     public String tipoSensor;
     public boolean estado;
     public boolean conectado;
-    public float cantidadLuz;
+    public float luzAmbiente;
+    public float luzArtificial;
     public String nombre;
     
     public SensorL() {
@@ -82,18 +83,24 @@ public class SensorL {
     public void setConectado(boolean conectado) {
         this.conectado= conectado;
     }
-    public float getCantidadLuz() {
-        return cantidadLuz;
+    public float getLuzAmbiente() {
+        return luzAmbiente;
     }
-    public void setCantidadLuz(float cantidadLuz) {
-        this.cantidadLuz =cantidadLuz;
+    public void setLuzAmbiente(float luzAmbiente) {
+        this.luzAmbiente = luzAmbiente;
+    }
+    public float getLuzArtificial() {
+        return luzArtificial;
+    }
+    public void setLuzArtificial(float luzArtificial) {
+        this.luzArtificial = luzArtificial;
     }
     @Override
     public String toString() {
         return "Sensor{" + "Cuarto =" + ubicacionC + "tiene la ubicacionE =" + ubicacionE + '}';
     }
     
-    public SensorL(Integer id, String nombre, String ubicacionE, String ubicacionC,  boolean conectado,boolean estado, String descripcion, String tipoSensor, float cantidadLuz){
+    public SensorL(Integer id, String nombre, String ubicacionE, String ubicacionC,  boolean conectado,boolean estado, String descripcion, String tipoSensor, float luzAmbiente, float luzArtificial){
         this.id=id;
         this.nombre = nombre;
         this.ubicacionE=ubicacionE;
@@ -102,7 +109,8 @@ public class SensorL {
         this.estado= estado;
         this.descripcion = descripcion;
         this.tipoSensor= tipoSensor;
-        this.cantidadLuz= cantidadLuz;
+        this.luzAmbiente= luzAmbiente;
+        this.luzArtificial = luzArtificial;
     
     }
    

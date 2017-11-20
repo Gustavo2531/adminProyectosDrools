@@ -220,7 +220,7 @@ public interface PadreCategorizationService {
     @Consumes("application/json")
     @Produces("application/json")
     @Path("/estadoSensorL")
-    public SensorL estadoSensorL(LecturaSensores lectura);
+    public SensorL estadoSensorL(LecturaSensorL lectura);
 
     @POST
     @Consumes("application/json")

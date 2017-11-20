@@ -449,13 +449,14 @@ public class PadreCategorizationServiceImpl implements PadreCategorizationServic
         return null;
     }
     @Override
-    public SensorL estadoSensorL(LecturaSensores lectura){
+    public SensorL estadoSensorL(LecturaSensorL lectura){
         for(Object o : kSession.getObjects()){
             if(o instanceof SensorL){
                 SensorL sen = (SensorL)o;
                 if(sen.getId()==lectura.getId()){
                     FactHandle handle = kSession.insert(sen);
-                    sen.setCantidadLuz(lectura.getLectura());
+                    sen.setLuzAmbiente(lectura.getLuzAmbiente());
+                    sen.setLuzArtificial(lectura.getLuzArtificial());
                     kSession.update(handle,sen);
                     kSession.fireAllRules();
                     return sen;
