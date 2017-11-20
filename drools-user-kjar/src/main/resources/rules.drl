@@ -1,7 +1,12 @@
 package org.drools.workshop;
 import org.drools.workshop.model.*;
 
+rule "prueba"
+    when
 
+    then
+        System.out.println("Soy la prueba drools si corre");
+end
 rule "Max Room Temp"
     when
         $m: SensorM(movimiento == true)
@@ -19,36 +24,96 @@ rule "Min Room Temp"
         $r: Cuarto($ac.ubicacionE==ubicacionE && $ac.ubicacionC==ubicacionC && $ac.temperatura < mintemperatura )
     then
          $ac.setTemperatura($r.getMinTemperatura());
+        
     end
 
-rule "No Movement"
+rule "No Movement F"
+    when
+        $m: SensorM(movimiento == false)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        
+    then
+        $af.setEstado(false);
+end
+rule "No Movement C"
     when
         $m: SensorM(movimiento == false)
         $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-        $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        
+    then
+        $ac.setEstado(false);
+    
+end
+rule "No Movement A"
+    when
+        $m: SensorM(movimiento == false)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
 
     then
-        $ac.setConectado(false);
-        $af.setConectado(false);
-        $aa.setConectado(false);
+        $aa.setEstado(false);
+    
 end
 
-rule "Consumo de Energia"
+rule "Movement F"
+    when
+        $m: SensorM(movimiento == true)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        
+    then
+        $af.setEstado(true);
+    
+end
+rule " Movement C"
     when
         $m: SensorM(movimiento == true)
         $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
         $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-        $af: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-        $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
-         eval(($ac.getConsumoEnergia()+$af.getConsumoEnergia()+$aa.getConsumoEnergia()) > $r.getMaxConsumoEnergia())
+        
     then
-        $aa.setConsumoEnergia($r.getMinConsumoEnergia());
-        $aa.setConsumoEnergia($r.getMinConsumoEnergia());
-        $aa.setConsumoEnergia($r.getMinConsumoEnergia());
+        $ac.setEstado(true);
+    
 end
+rule "Movement A"
+    when
+        $m: SensorM(movimiento == true)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
 
+    then
+        $aa.setEstado(true);
+    
+end
+rule "Consumo de Energia A"
+    when
+        $m: SensorM(movimiento == true)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $aa: ActuadorA($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC && estado==true)
+        eval(($aa.getConsumoEnergia()) > $r.getMaxConsumoEnergia())
+    then
+        $aa.setEstado(false);
+end
+rule "Consumo de Energia F"
+    when
+        $m: SensorM(movimiento == true)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $af: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC && estado==true)
+        eval($af.getConsumoEnergia() > $r.getMaxConsumoEnergia())
+    then
+        $af.setEstado(false);
+end
+rule "Consumo de Energia C"
+    when
+        $m: SensorM(movimiento == true)
+        $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+        $ac: ActuadorC($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC && estado==true)
+        eval(($ac.getConsumoEnergia()) > $r.getMaxConsumoEnergia())
+    then
+        $ac.setEstado(false);
+end
 rule "Max Vel"
     when
         $m: SensorM(movimiento == true)
@@ -56,6 +121,7 @@ rule "Max Vel"
         $r: Cuarto($aa.ubicacionE==ubicacionE && $aa.ubicacionC==ubicacionC && maxVelocidad <= $aa.velocidad)
     then
         $aa.setVelocidad($r.getMaxVelocidad());
+    
     end
 
 rule "Min Vel"
@@ -65,6 +131,7 @@ rule "Min Vel"
         $r: Cuarto($aa.ubicacionE==ubicacionE && $aa.ubicacionC==ubicacionC && minVelocidad >= $aa.velocidad)
     then
         $aa.setVelocidad($r.getMinVelocidad());
+    
     end
 
 rule "Apagar Luz"
@@ -75,7 +142,7 @@ rule "Apagar Luz"
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     eval($s.getLuzAmbiente() > $r.getThreshold())
   then
-    $f.setConectado(false);
+    $f.setEstado(false);
 end
 
 rule "Prender Luz"
@@ -86,7 +153,8 @@ rule "Prender Luz"
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     eval($s.getLuzAmbiente() < $r.getThreshold())
   then
-    $f.setConectado(true);
+    $f.setEstado(true);
+    $f.setIntensidad($r.getThreshold()-$s.getLuzAmbiente());
 end
 
 rule "Bajar cantidad de Luz"
@@ -97,7 +165,7 @@ rule "Bajar cantidad de Luz"
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     eval($s.getLuzAmbiente() < $r.getThreshold() && $s.getLuzAmbiente() + $s.getLuzArtificial() > $r.getThreshold())
   then
-    $f.setIntensidad(30);
+    $f.setIntensidad($r.getThreshold()-$s.getLuzAmbiente());
 end
 
 rule "Subir cantidad de Luz"
@@ -108,5 +176,5 @@ rule "Subir cantidad de Luz"
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     eval($s.getLuzAmbiente() < $r.getThreshold() && $s.getLuzAmbiente() + $s.getLuzArtificial() < $r.getThreshold())
   then
-    $f.setIntensidad(75);
+    $f.setIntensidad($r.getThreshold()-$s.getLuzAmbiente());
 end
