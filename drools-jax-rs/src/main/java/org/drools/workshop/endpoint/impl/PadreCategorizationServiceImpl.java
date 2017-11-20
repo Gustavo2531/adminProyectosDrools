@@ -305,6 +305,114 @@ public class PadreCategorizationServiceImpl implements PadreCategorizationServic
         }
         return null;
     }
+
+    //delete
+
+    @Override
+    public SensorL borrarSensorL(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorL){
+                SensorL sen = (SensorL)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    kSession.delete(handle);
+                    kSession.fireAllRules();
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorC borrarSensorC(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorC){
+                SensorC sen = (SensorC)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    kSession.delete(handle);
+                    kSession.fireAllRules();
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorM borrarSensorM(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorM){
+                SensorM sen = (SensorM)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    kSession.delete(handle);
+                    kSession.fireAllRules();
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorT borrarSensorT(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorT){
+                SensorT sen = (SensorT)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    kSession.delete(handle);
+                    kSession.fireAllRules();
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public ActuadorA borrarActuadorA(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof ActuadorA){
+                ActuadorA sen = (ActuadorA)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    kSession.delete(handle);
+                    kSession.fireAllRules();
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public ActuadorC borrarActuadorC(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof ActuadorC){
+                ActuadorC sen = (ActuadorC)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    kSession.delete(handle);
+                    kSession.fireAllRules();
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public ActuadorF borrarActuadorF(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof ActuadorF){
+                ActuadorF sen = (ActuadorF)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    kSession.delete(handle);
+                    kSession.fireAllRules();
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
     private void printKieSessionAllFacts(KieSession kSession) {
         System.out.println(" >> Start - Printing All Facts in the Kie Session");
         for (Object o : kSession.getObjects()) {

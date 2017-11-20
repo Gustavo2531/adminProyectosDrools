@@ -165,6 +165,48 @@ public interface PadreCategorizationService {
     @Produces("application/json")
     @Path("/apagarActuadorF")
     public ActuadorF apagarActuadorF(EstadoSensor estado);
-
     
+    //delete
+    
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/apagarSensorL")
+    public SensorL borrarSensorL(EstadoSensor estado);
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/borrarSensorM")
+    public SensorM borrarSensorM(EstadoSensor estado);
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/borrarSensorT")
+    public SensorT borrarSensorT(EstadoSensor estado);
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/borrarSensorC")
+    public SensorC borrarSensorC(EstadoSensor estado);
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/borrarActuadorC")
+    public ActuadorC borrarActuadorC(EstadoSensor estado);
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/borrarActuadorA")
+    public ActuadorA borrarActuadorA(EstadoSensor estado);
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/borrarActuadorF")
+    public ActuadorF borrarActuadorF(EstadoSensor estado);
 }
