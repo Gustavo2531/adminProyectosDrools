@@ -12,7 +12,7 @@ public class ActuadorF {
     
     public String nombre;
     public Integer id;
-    public float [][]color = new float[1][2];
+    public float[] color = new float[3];
     public String unidad;
     public String ubicacionE;
     public String ubicacionC;
@@ -107,13 +107,14 @@ public class ActuadorF {
         this.unidad = unidad;
     }
     
-    public float[][] getColor() {
+    public float[] getColor() {
         return color;
     }
     
-    public void setColor(float x, float y) {
-        this.color[0][0] = x;
-        this.color[0][1]= y;
+    public void setColor(float r, float g, float b) {
+        this.color[0] = r;
+        this.color[1] = g;
+        this.color[2] = b;
     }
     
     @Override
@@ -121,7 +122,7 @@ public class ActuadorF {
         return "ActuadorC{" + "nombre=" + nombre + ", id=" + id + ", unidad=" + unidad + '}';
     }
     
-    public ActuadorF(Integer id, String nombre, String ubicacionE,String ubicacionC,boolean conectado, boolean estado,String descripcion, String tipoActuador, float consumoEnergia,String unidad, float intensidad, float x, float y){
+    public ActuadorF(Integer id, String nombre, String ubicacionE,String ubicacionC,boolean conectado, boolean estado,String descripcion, String tipoActuador, float consumoEnergia,String unidad, float intensidad, float r, float g,float b){
         this.id = id;
         this.nombre = nombre;
         this.ubicacionE=ubicacionE;
@@ -133,13 +134,8 @@ public class ActuadorF {
         this.consumoEnergia= consumoEnergia;
         this.unidad = unidad;
         this.intensidad= intensidad;
-        this.color[0][0] = x;
-        this.color[0][1]= y;
-        
-        
-        
+        this.color[0] = r;
+        this.color[1] = g;
+        this.color[2] = b;
     }
-    
-    
-    
 }

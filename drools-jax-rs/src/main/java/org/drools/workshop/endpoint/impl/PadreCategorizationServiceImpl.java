@@ -413,6 +413,72 @@ public class PadreCategorizationServiceImpl implements PadreCategorizationServic
         }
         return null;
     }
+
+    @Override
+    public SensorC estadoSensorC(LecturaSensores lectura){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorC){
+                SensorC sen = (SensorC)o;
+                if(sen.getId()==lectura.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEnergia(lectura.getLectura());
+                    kSession.update(handle,sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public SensorT estadoSensorT(LecturaSensores lectura){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorT){
+                SensorT sen = (SensorT)o;
+                if(sen.getId()==lectura.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setTemperatura(lectura.getLectura());
+                    kSession.update(handle,sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorL estadoSensorL(LecturaSensores lectura){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorL){
+                SensorL sen = (SensorL)o;
+                if(sen.getId()==lectura.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setCantidadLuz(lectura.getLectura());
+                    kSession.update(handle,sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorM estadoSensorM(EstadoSensor lectura){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorM){
+                SensorM sen = (SensorM)o;
+                if(sen.getId()==lectura.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setMovimiento(lectura.getEstado());
+                    kSession.update(handle,sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
     private void printKieSessionAllFacts(KieSession kSession) {
         System.out.println(" >> Start - Printing All Facts in the Kie Session");
         for (Object o : kSession.getObjects()) {
