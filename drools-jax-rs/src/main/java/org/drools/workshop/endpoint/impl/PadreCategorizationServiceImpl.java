@@ -22,8 +22,9 @@ public class PadreCategorizationServiceImpl implements PadreCategorizationServic
     private User admin = new User("admin","password");
     @Override
     public User login(User user){
+        System.out.println(user.getUsername()+" "+user.getPassword());
         if(user.getUsername().equals(admin.getUsername())){
-            if(admin.validatePass(user.getUsername())){
+            if(admin.validatePass(user.getPassword())){
                 return admin;
             }
             return  null;
