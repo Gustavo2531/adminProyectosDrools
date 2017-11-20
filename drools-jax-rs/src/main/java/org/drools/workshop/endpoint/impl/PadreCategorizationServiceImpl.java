@@ -5,7 +5,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import org.drools.workshop.model.*;
-
+import org.kie.api.runtime.rule.FactHandle;
 import org.drools.workshop.endpoint.api.*;
 import org.kie.api.cdi.KReleaseId;
 import org.kie.api.cdi.KSession;
@@ -185,15 +185,126 @@ public class PadreCategorizationServiceImpl implements PadreCategorizationServic
     
     @Override
     public List<Cuarto> getCuartos() {
-        List<Cuarto> alumnocurso= new ArrayList<Cuarto>();
+        List<Cuarto> cuartos= new ArrayList<Cuarto>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Cuarto) {
-                alumnocurso.add((Cuarto) o);
+                cuartos.add((Cuarto) o);
             }
         }
-        return alumnocurso;
+        return cuartos;
     }
-    
+    @Override
+    public SensorL apagarSensorL(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorL){
+                SensorL sen = (SensorL)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEstado(estado.getEstado());
+                    kSession.update(handle, sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorC apagarSensorC(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorC){
+                SensorC sen = (SensorC)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEstado(estado.getEstado());
+                    kSession.update(handle, sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorM apagarSensorM(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorM){
+                SensorM sen = (SensorM)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEstado(estado.getEstado());
+                    kSession.update(handle, sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public SensorT apagarSensorT(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof SensorT){
+                SensorT sen = (SensorT)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEstado(estado.getEstado());
+                    kSession.update(handle, sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public ActuadorA apagarActuadorA(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof ActuadorA){
+                ActuadorA sen = (ActuadorA)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEstado(estado.getEstado());
+                    kSession.update(handle, sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public ActuadorC apagarActuadorC(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof ActuadorC){
+                ActuadorC sen = (ActuadorC)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEstado(estado.getEstado());
+                    kSession.update(handle, sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public ActuadorF apagarActuadorF(EstadoSensor estado){
+        for(Object o : kSession.getObjects()){
+            if(o instanceof ActuadorF){
+                ActuadorF sen = (ActuadorF)o;
+                if(sen.getId()==estado.getId()){
+                    FactHandle handle = kSession.insert(sen);
+                    sen.setEstado(estado.getEstado());
+                    kSession.update(handle, sen);
+                    kSession.fireAllRules();
+                    return sen;
+                }
+            }
+        }
+        return null;
+    }
     private void printKieSessionAllFacts(KieSession kSession) {
         System.out.println(" >> Start - Printing All Facts in the Kie Session");
         for (Object o : kSession.getObjects()) {
