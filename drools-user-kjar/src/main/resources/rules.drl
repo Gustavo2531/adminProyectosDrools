@@ -136,7 +136,7 @@ rule "Min Vel"
 
 rule "Apagar Luz"
   when
-    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $m: SensorM(movimiento == true )
     $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
@@ -147,7 +147,7 @@ end
 
 rule "Prender Luz"
   when
-    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $m: SensorM(movimiento == true )
     $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
@@ -159,7 +159,7 @@ end
 
 rule "Bajar cantidad de Luz"
   when
-    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $m: SensorM(movimiento == true )
     $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
@@ -170,7 +170,7 @@ end
 
 rule "Subir cantidad de Luz"
   when
-    $m: SensorM(movimiento == true && $m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
+    $m: SensorM(movimiento == true )
     $s: SensorL($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $r: Cuarto($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
     $f: ActuadorF($m.ubicacionE==ubicacionE && $m.ubicacionC==ubicacionC)
